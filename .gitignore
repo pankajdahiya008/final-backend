@@ -1,0 +1,64 @@
+# ---------------------------
+# Java / Maven / Gradle
+# ---------------------------
+/target/
+/build/
+/out/
+.env
+
+# Ignore local Maven wrapper cache
+.mvn/wrapper/maven-wrapper.jar
+
+# Allow source build folders
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ---------------------------
+# IDE files
+# ---------------------------
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+# ---------------------------
+# Terraform
+# ---------------------------
+.terraform/            # local provider + module cache
+*.tfstate             # Terraform state files
+*.tfstate.backup
+crash.log
+*.tfvars              # variables that may contain secrets
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# ---------------------------
+# OS / Misc
+# ---------------------------
+.DS_Store
+Thumbs.db

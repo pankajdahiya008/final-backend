@@ -1,0 +1,46 @@
+name: Build & Deploy to Azure Container App
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE_NAME: springboot-app
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login to ACR
+        run: |
+          az acr login --name ${{ secrets.ACR_NAME }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build & Push Docker Image (linux/amd64)
+        run: |
+          IMAGE_TAG=${{ github.sha }}
+          docker buildx build \
+            --platform linux/amd64 \
+            -t ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:$IMAGE_TAG \
+            --push \
+            .
+
+      - name: Deploy to Azure Container App
+        run: |
+          IMAGE_TAG=${{ github.sha }}
+          az containerapp update \
+            --name ${{ secrets.CONTAINER_APP_NAME }} \
+            --resource-group ${{ secrets.RESOURCE_GROUP }} \
+            --image ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:$IMAGE_TAG
