@@ -18,6 +18,7 @@ import com.zosh.repository.CartRepository;
 import com.zosh.repository.OrderRepository;
 import com.zosh.repository.PaymentOrderRepository;
 import com.zosh.service.CartService;
+import com.zosh.service.EmailService;
 import com.zosh.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
@@ -44,6 +45,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final OrderRepository orderRepository;
     private final CartRepository cartRepository;
     private final CartService cartService; // ✅ Inject CartService
+    private final EmailService emailService; // ✅ Inject EmailService
 
     @Override
     public PaymentOrder createOrder(User user, Set<Order> orders) {
@@ -97,6 +99,22 @@ public class PaymentServiceImpl implements PaymentService {
 
                 paymentOrder.setStatus(PaymentOrderStatus.SUCCESS);
                 paymentOrderRepository.save(paymentOrder);
+
+                // Send payment success email using existing sendVerificationOtpEmail method
+                try {
+                    String userEmail = paymentOrder.getUser().getEmail();
+                    String subject = "Payment Successful - Order Confirmed";
+                    String message = String.format(
+                            "Dear %s,\n\nYour payment has been successfully processed!\n\nOrder Details:\nAmount Paid: ₹%d\nNumber of Orders: %d\n\nThank you for your purchase!\n\nBest regards,\nE-commerce Team\n\n",
+                            paymentOrder.getUser().getFullName(),
+                            paymentOrder.getAmount(),
+                            orders.size()
+                    );
+                    emailService.sendVerificationOtpEmail(userEmail, "", subject, message);
+                } catch (Exception e) {
+                    // Log error but don't fail the payment process
+                    System.err.println("Failed to send payment success email: " + e.getMessage());
+                }
 
                 cartService.clearCart(paymentOrder.getUser());
 
