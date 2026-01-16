@@ -30,7 +30,7 @@ public class User {
 
     private String mobile;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private USER_ROLE role;
 
     @OneToMany
