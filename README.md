@@ -14,12 +14,6 @@ A comprehensive Spring Boot-based e-commerce platform with multi-vendor support,
 - **User authentication** with JWT tokens
 - **Admin dashboard** with revenue analytics
 
-### AI-Powered Features
-- **AI Chatbot** for customer support
-- **AI Product Recommendations**
-- **Product Details Bot** for enhanced product information
-- **Gemini AI Integration** for intelligent features
-
 ### Technical Features
 - **Spring Boot 3.3.2** with Java 17
 - **Spring Security** with JWT authentication
@@ -51,7 +45,6 @@ A comprehensive Spring Boot-based e-commerce platform with multi-vendor support,
 - **Database**: MySQL / SQL Server
 - **Authentication**: JWT (JSON Web Tokens)
 - **Payment**: Stripe, Razorpay
-- **AI**: Spring AI with Gemini integration
 - **Documentation**: SpringDoc OpenAPI
 - **Containerization**: Docker
 - **Cloud**: Azure Container Apps, Azure SQL Database
@@ -72,7 +65,7 @@ A comprehensive Spring Boot-based e-commerce platform with multi-vendor support,
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/pankajdahiya008/final-backend.git
+   git clone repo-url
    cd final-backend
    ```
 
@@ -178,7 +171,6 @@ Once the application is running, visit:
 | `STRIPE_API_KEY` | Stripe API key | Yes |
 | `MAIL_USERNAME` | Email username | Yes |
 | `MAIL_PASSWORD` | Email password | Yes |
-| `GEMINI_API_KEY` | Gemini AI API key | Yes |
 
 ### Database Schema
 
@@ -267,10 +259,6 @@ Terraform configuration includes:
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
-## 👥 Authors
-
-- **Pankaj Dahiya** - *Initial work* - [@pankajdahiya008](https://github.com/pankajdahiya008)
 
 ## 🙏 Acknowledgments
 

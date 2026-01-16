@@ -50,7 +50,7 @@ public class SellerController {
         String otp = OtpUtils.generateOTP();
         VerificationCode verificationCode = verificationService.createVerificationCode(otp, req.getEmail());
 
-        String subject = "Zosh Bazaar Login Otp";
+        String subject = "Shop Zone Login Otp";
         String text = "your login otp is - ";
         emailService.sendVerificationOtpEmail(req.getEmail(), verificationCode.getOtp(), subject, text);
 
@@ -127,8 +127,8 @@ public class SellerController {
         String otp = OtpUtils.generateOTP();
         VerificationCode verificationCode = verificationService.createVerificationCode(otp, seller.getEmail());
 
-        String subject = "Zosh Bazaar Email Verification Code";
-        String text = "Welcome to Zosh Bazaar, verify your account using this link ";
+        String subject = "Shop Zone Email Verification Code";
+        String text = "Welcome to Shop Zone, verify your account using this link ";
         String frontend_url = "https://frontend-vite-teal.vercel.app/verify-seller/";
         emailService.sendVerificationOtpEmail(seller.getEmail(), verificationCode.getOtp(), subject, text + frontend_url);
         return new ResponseEntity<>(savedSeller, HttpStatus.CREATED);
