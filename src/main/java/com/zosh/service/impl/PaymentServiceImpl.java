@@ -134,7 +134,7 @@ public class PaymentServiceImpl implements PaymentService {
         paymentLinkRequest.put("notify", notify);
 
         paymentLinkRequest.put("reminder_enable", true);
-        paymentLinkRequest.put("callback_url", "http://localhost:3000/payment-success/" + orderId);
+        paymentLinkRequest.put("callback_url", "https://frontend-vite-teal.vercel.app/payment-success/" + orderId);
         paymentLinkRequest.put("callback_method", "get");
 
         return razorpay.paymentLink.create(paymentLinkRequest);
@@ -147,8 +147,8 @@ public class PaymentServiceImpl implements PaymentService {
         SessionCreateParams params = SessionCreateParams.builder()
                 .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                 .setMode(SessionCreateParams.Mode.PAYMENT)
-                .setSuccessUrl("http://localhost:3000/payment-success/" + orderId)
-                .setCancelUrl("http://localhost:3000/payment/cancel")
+                .setSuccessUrl("https://frontend-vite-teal.vercel.app/payment-success/" + orderId)
+                .setCancelUrl("https://frontend-vite-teal.vercel.app/payment/cancel")
                 .addLineItem(
                         SessionCreateParams.LineItem.builder()
                                 .setQuantity(1L)

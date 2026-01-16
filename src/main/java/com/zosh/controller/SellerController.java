@@ -129,7 +129,7 @@ public class SellerController {
 
         String subject = "Zosh Bazaar Email Verification Code";
         String text = "Welcome to Zosh Bazaar, verify your account using this link ";
-        String frontend_url = "http://localhost:3000/verify-seller/";
+        String frontend_url = "https://frontend-vite-teal.vercel.app/verify-seller/";
         emailService.sendVerificationOtpEmail(seller.getEmail(), verificationCode.getOtp(), subject, text + frontend_url);
         return new ResponseEntity<>(savedSeller, HttpStatus.CREATED);
     }
