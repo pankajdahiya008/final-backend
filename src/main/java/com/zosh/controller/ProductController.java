@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.cache.annotation.Cacheable;
 import java.util.List;
 
 @RestController
@@ -42,6 +42,7 @@ public class ProductController {
     }
 
     @GetMapping
+    @Cacheable(value = "products", key = "#category + ':' + #pageNumber")
     public ResponseEntity<Page<Product>> getAllProducts(@RequestParam(required = false) String category,
                                                         @RequestParam(required = false) String brand,
                                                         @RequestParam(required = false) String color,

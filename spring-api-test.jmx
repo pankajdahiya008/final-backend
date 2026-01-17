@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Spring API - Medium Load Test" enabled="true">
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+    </TestPlan>
+
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Medium Load Thread Group" enabled="true">
+        <intProp name="ThreadGroup.num_threads">30</intProp>
+        <intProp name="ThreadGroup.ramp_time">60</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController"
+          guiclass="LoopControlPanel" testclass="LoopController">
+          <stringProp name="LoopController.loops">10</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui"
+          testclass="HTTPSamplerProxy"
+          testname="GET Products API"
+          enabled="true">
+
+          <stringProp name="HTTPSampler.domain">spring-api.delightfulmoss-a0c493ab.eastus.azurecontainerapps.io</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/products</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"
+            guiclass="HTTPArgumentsPanel"
+            testclass="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="category" elementType="HTTPArgument">
+                <stringProp name="Argument.name">category</stringProp>
+                <stringProp name="Argument.value">men_t_shirts</stringProp>
+                <boolProp name="Argument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="pageNumber" elementType="HTTPArgument">
+                <stringProp name="Argument.name">pageNumber</stringProp>
+                <stringProp name="Argument.value">0</stringProp>
+                <boolProp name="Argument.use_equals">true</boolProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+
+        <hashTree/>
+
+        <ResultCollector guiclass="SummaryReport"
+          testclass="ResultCollector"
+          testname="Summary Report"
+          enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <fieldNames>true</fieldNames>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
